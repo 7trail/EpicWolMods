@@ -37,7 +37,7 @@ namespace CameraModExample {
         void Awake() {
             // this was the just first little tester code to see if bepin was actually running on WoL
             // it was a rousing success c:
-            Debug.Log("I belive in you c:");
+            Debug.Log("No need to believe in me anymore");
 
             // these are hooks
             // they hook on to the functions in the game. when the hooked functon is called, our functon will be called
@@ -82,6 +82,7 @@ namespace CameraModExample {
             // after the camera initalizes, I'm swoocing right in and increasing these values so the camera will follow players up to a huge distance
             self.maxHorizontalDistBetweenPlayers = 100;
             self.maxVerticalDistBetweenPlayers = 80;
+
             self.teleportToOtherPlayerRange = 120;
 
             // zooming out the camera a little bit by default cause I want that
