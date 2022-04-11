@@ -69,7 +69,8 @@ namespace CameraModExample {
             }*/
 
             //New code!
-            CameraController.originalCameraSize += Input.mouseScrollDelta.y*5*configScrollSpeed.Value;
+            CameraController.originalCameraSize += Input.mouseScrollDelta.y*configScrollSpeed.Value;
+            CameraController.originalCameraSize = Mathf.Clamp(CameraController.originalCameraSize, 1, Mathf.Infinity);
 
         }
 
