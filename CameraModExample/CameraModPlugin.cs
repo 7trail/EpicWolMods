@@ -33,7 +33,7 @@ namespace CameraModExample {
 
         //declaring a variable we'll use later
         private bool hasZoomedCamera;
-
+        private BepInEx.Configuration.ConfigEntry<float> configScrollSpeed;
         void Awake() {
             // this was the just first little tester code to see if bepin was actually running on WoL
             // it was a rousing success c:
@@ -43,13 +43,20 @@ namespace CameraModExample {
             // they hook on to the functions in the game. when the hooked functon is called, our functon will be called
             On.CameraController.Awake += CameraController_Awake;
             On.CameraController.Update += CameraController_Update;
+
+            configScrollSpeed =
+                Config.Bind<float>("Config section",
+                                 "CameraZoomSpeed",
+                                 1,
+                                 "The camera zoom speed. Ideally don't make this too high.");
+
         }
 
         // This Update() function will run every frame
         void Update() {
 
             // Every frame, we'll check if the user is currently pressing f1 on the keyboard
-            if (Input.GetKeyDown(KeyCode.F1)) {
+            /*if (Input.GetKeyDown(KeyCode.F1)) {
                 //if they just pressed f1 this frame, let's zoom the camera out
                 CameraController.originalCameraSize += 0.5f;
                 Logger.LogMessage("zooming the camera out to " + CameraController.originalCameraSize);
@@ -59,7 +66,11 @@ namespace CameraModExample {
             if (Input.GetKeyDown(KeyCode.F2)) {
                 CameraController.originalCameraSize -= 0.5f;
                 Logger.LogMessage("zooming the camera in to " + CameraController.originalCameraSize);
-            }
+            }*/
+
+            //New code!
+            CameraController.originalCameraSize += Input.mouseScrollDelta.y*configScrollSpeed.Value;
+
         }
 
         private void CameraController_Awake(On.CameraController.orig_Awake orig, CameraController self) {
